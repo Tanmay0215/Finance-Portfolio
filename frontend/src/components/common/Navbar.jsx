@@ -1,11 +1,20 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <div>
-      Navbar
-    </div>
-  )
-}
+    <nav className="bg-gray-800 text-white p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <Link to="/" className="text-2xl font-bold">FinancePortfolio</Link>
+        <div className="space-x-4">
+          <Link to="/dashboard" className="hover:text-gray-300">Dashboard</Link>
+          <Link to="/crypto" className="hover:text-gray-300">Crypto</Link>
+          <Link to="/us-markets" className="hover:text-gray-300">US Markets</Link>
+          {/* Add more links as needed */}
+        </div>
+      </div>
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;
