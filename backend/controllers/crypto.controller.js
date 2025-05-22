@@ -4,11 +4,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const CMC_API_KEY = process.env.CMC_API_KEY
-const CMC_API_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest';
+const CMC_API_URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency';
 
 export const getCryptoData = async (req, res) => {
     try {
-        const response = await axios.get(CMC_API_URL, {
+        const response = await axios.get(`${CMC_API_URL}/listings/latest`, {
             headers: {
                 'X-CMC_PRO_API_KEY': CMC_API_KEY,
             },
@@ -28,11 +28,12 @@ export const getCryptoData = async (req, res) => {
 export const getCryptoDataById = async (req, res) => {
     const { id } = req.params;
     try {
-        const response = await axios.get(`${CMC_API_URL}/${id}`, {
+        const response = await axios.get(`${CMC_API_URL}/quotes/latest`, {
             headers: {
                 'X-CMC_PRO_API_KEY': CMC_API_KEY,
             },
             params: {
+                symbol: id.toUpperCase(),
                 convert: 'USD', // Adjust as needed
             },
         });
