@@ -2,9 +2,9 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import Crypto from './pages/Crypto';
+import Crypto from './pages/crypto/Crypto';
 import USMarkets from './pages/USMarkets';
-import CryptoDetails from './pages/CryptoDetails';
+import CryptoDetails from './pages/crypto/CryptoDetails';
 
 import MarketLayout from './layouts/MarketsLayout';
 import DashboardHome from './pages/dashboard/DashboardHome';
