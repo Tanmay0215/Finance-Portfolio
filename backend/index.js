@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import cryptoRouter from './routes/crypto.routes.js';
+import authRouter from './routes/auth.routes.js';
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/crypto', cryptoRouter);
+app.use('/api/auth', authRouter);
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`)
