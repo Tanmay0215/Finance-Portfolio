@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Crypto from './pages/crypto/Crypto';
-import USMarkets from './pages/USmarket/USMarkets';
 import CryptoDetails from './pages/crypto/CryptoDetails';
 
 import MarketLayout from './layouts/MarketsLayout';
@@ -18,13 +17,11 @@ const App = () => {
     <Routes>
       <Route path="/" element={<MarketLayout />}>
         <Route index element={<Home />} />
-        <Route path="crypto" element={<Crypto />}>
-        </Route>
+        <Route path="crypto" element={<Crypto />} />
         <Route path="/crypto/:id" element={<CryptoDetails />} />
-        <Route path="us-markets" element={<USMarkets />} />
-         <Route path="/signup" element={<SignUp />} />
-         <Route path="/login" element={<Login />} />
       </Route>
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
 
       <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardHome />} />
