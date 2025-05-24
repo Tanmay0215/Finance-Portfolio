@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: '', email: '', password: '' });
   const [message, setMessage] = useState('');
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -12,20 +16,20 @@ const SignUp = () => {
     e.preventDefault();
     setMessage('');
     try {
-      const res = await fetch('http://localhost:3000/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
+      const res = await axios.post(`${BACKEND_URL}/api/auth/signup`, form);
       if (res.status === 201) {
-        setMessage('Account created successfully!');
-      } else if (res.status === 409) {
+        setMessage(res.data.message || 'Account created successfully!');
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Signup error:', error);
+      if (error.response && error.response.data && error.response.data.message) {
+        setMessage(error.response.data.message);
+      } else if (error.response && error.response.status === 409) {
         setMessage('User already exists.');
       } else {
-        setMessage('Something went wrong.');
+        setMessage('Server error. Please try again later.');
       }
-    } catch (err) {
-      setMessage('Server error.');
     }
   };
 

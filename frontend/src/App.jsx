@@ -12,6 +12,8 @@ import MarketLayout from './layouts/MarketsLayout';
 import DashboardHome from './pages/dashboard/DashboardHome';
 import DashboardLayout from './layouts/DashboardLayout';
 import Portfolio from './pages/dashboard/Portfolio';
+import SignUp from './pages/auth/SignUp';
+import Login from './pages/auth/Login';
 
 const App = () => {
   return (
@@ -30,6 +32,9 @@ const App = () => {
         <Route index element={<DashboardHome />} />
         <Route path="portfolio" element={<Portfolio />} />
       </Route>
+
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

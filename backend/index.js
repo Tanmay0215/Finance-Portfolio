@@ -3,6 +3,9 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import cryptoRouter from './routes/crypto.routes.js';
 import authRouter from './routes/auth.routes.js';
+import mongoose from 'mongoose';
+
+mongoose.connect(process.env.MONGODB_URI)
 
 dotenv.config()
 
