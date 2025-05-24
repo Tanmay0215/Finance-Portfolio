@@ -5,8 +5,6 @@ import NotFound from './pages/NotFound';
 import Crypto from './pages/crypto/Crypto';
 import USMarkets from './pages/USmarket/USMarkets';
 import CryptoDetails from './pages/crypto/CryptoDetails';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
 
 import MarketLayout from './layouts/MarketsLayout';
 import DashboardHome from './pages/dashboard/DashboardHome';
