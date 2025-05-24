@@ -1,9 +1,10 @@
 import React from 'react'
+import StockOverview from './StockOverview'
 
 const USMarkets = () => {
   return (
     <div>
-      USMarkets
+      <StockOverview/>
     </div>
   )
 }

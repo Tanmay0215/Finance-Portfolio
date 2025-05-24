@@ -10,6 +10,8 @@ const Navbar = () => {
           <Link to="/dashboard" className="hover:text-gray-300">Dashboard</Link>
           <Link to="/crypto" className="hover:text-gray-300">Crypto</Link>
           <Link to="/us-markets" className="hover:text-gray-300">US Markets</Link>
+          <Link to="/signup" className="hover:text-gray-300">Sign Up</Link>
+          <Link to="/login" className="hover:text-gray-300">Login</Link>
           {/* Add more links as needed */}
         </div>
       </div>
