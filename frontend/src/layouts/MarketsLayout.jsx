@@ -5,12 +5,12 @@ import { Outlet } from 'react-router-dom';
 
 const MarketLayout = () => {
   return (
-    <div className="min-h-screen">
-        <Navbar />
-        <main className="bg-gray-100">
-          <Outlet />
-        </main>
-        <Footer />
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-grow bg-slate-50">
+        <Outlet />
+      </main>
+      <Footer />
     </div>
   );
 };
