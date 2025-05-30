@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cryptoRouter from './routes/crypto.routes.js';
 import authRouter from './routes/auth.routes.js';
 import chatRouter from './routes/chat.routes.js';
+import aiRouter from './routes/ai.routes.js'; // Import the AI router
 import connectDB from './config/db.js';
 
 dotenv.config()
@@ -20,9 +21,11 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+// Routes
 app.use('/api/crypto', cryptoRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/chat', chatRouter);
+app.use('/api/ai', aiRouter);
 
 app.listen(PORT, () => {
     connectDB()
