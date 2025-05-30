@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../utils/api'; // Import the configured Axios instance
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
   const naviagte = useNavigate();
 
   const handleChange = (e) => {
@@ -13,14 +12,17 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post(`${BACKEND_URL}/api/auth/login`, form)
-    if (response.data) {
-      console.log('Login successful:', response.data);
-      alert('Login successful');
-      naviagte('/dashboard');
+    try {
+      const response = await api.post('/api/auth/login', form); // Use api instance
+      if (response.data) {
+        console.log('Login successful:', response.data);
+        alert('Login successful');
+        naviagte('/dashboard');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+      alert('Login failed. Please check your credentials and try again.');
     }
-
-    alert(`Logged in with\nEmail: ${form.email}`);
   };
 
   return (

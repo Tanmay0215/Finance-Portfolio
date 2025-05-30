@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../../utils/api'; // Import the configured Axios instance
 import { useNavigate } from 'react-router-dom';
 
 const ArrowUpIcon = () => <span className="text-green-500">▲</span>;
@@ -15,11 +15,10 @@ const Crypto = () => {
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const fetchPortfolioData = async () => {
     try {
-      const response = await axios.get(`${BACKEND_URL}/api/crypto/get-all`);
+      const response = await api.get('/api/crypto/get-all'); // Use api instance
       setPortfolioData(response.data);
     } catch (err) {
       console.error("Error fetching portfolio data:", err);

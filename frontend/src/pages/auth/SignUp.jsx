@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../../utils/api'; // Import the configured Axios instance
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
@@ -16,7 +16,7 @@ const SignUp = () => {
     e.preventDefault();
     setMessage('');
     try {
-      const res = await axios.post(`${BACKEND_URL}/api/auth/signup`, form);
+      const res = await api.post('/api/auth/signup', form); // Use api instance
       if (res.status === 201) {
         setMessage(res.data.message || 'Account created successfully!');
         navigate('/login');
@@ -77,9 +77,9 @@ const SignUp = () => {
           opacity="0.4"
         />
         {/* Faint coin shapes */}
-        <circle cx="1300" cy="320" r="32" fill="#fff" opacity="0.08"/>
-        <circle cx="1350" cy="340" r="18" fill="#fff" opacity="0.12"/>
-        <circle cx="1270" cy="350" r="12" fill="#fff" opacity="0.10"/>
+        <circle cx="1300" cy="320" r="32" fill="#fff" opacity="0.08" />
+        <circle cx="1350" cy="340" r="18" fill="#fff" opacity="0.12" />
+        <circle cx="1270" cy="350" r="12" fill="#fff" opacity="0.10" />
       </svg>
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md relative z-10">
         <h2 className="text-3xl font-semibold text-green-500 mb-6 text-center">Create Your Account</h2>
