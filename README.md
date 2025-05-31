@@ -2,7 +2,7 @@
 
 ## Description
 
-A web application to help users track their financial investments and portfolio performance. Users can add various assets like stocks, bonds, and cryptocurrencies, view their current values, and analyze historical performance.
+A web application to help users track their financial investments and portfolio performance. Users can add various assets like stocks, bonds, and cryptocurrencies, view their current values, and analyze historical performance. The application also features an AI chatbot for portfolio insights and recommendations.
 
 ## Features
 
@@ -10,34 +10,34 @@ A web application to help users track their financial investments and portfolio 
 *   Add, edit, and delete financial assets
 *   Real-time (or near real-time) price updates for assets
 *   Portfolio overview with total value and performance metrics
-*   Historical performance charts
-*   Secure data storage
+*   Detailed cryptocurrency information and market data
+*   Cryptocurrency price charts and historical data
+*   AI-powered chatbot for portfolio analysis and financial advice
+*   Dashboard with net worth, protocol allocation, and breakdown tables
+*   Secure API endpoints for data management
 
 ## Technologies Used
 
 *   **Backend:** Node.js, Express.js
-*   **Frontend:** EJS (Embedded JavaScript templates), HTML, CSS, JavaScript
-*   **Authentication:** Passport.js (or specify if different)
-*   
+*   **Frontend:** React.js, Tailwind CSS
+*   **Authentication:** JWT (JSON Web Tokens)
+*   **Database**: MongoDB
+*   **Generative AI**: Gemini API
+
 ## Setup Instructions
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
-    cd financial-portfolio-tracker
+    git clone https://github.com/Tanmay0215/Finance-Portfolio
+    cd finance-portfolio
     ```
 2.  **Install dependencies:**
     ```bash
     npm install
     ```
 3.  **Set up environment variables:**
-    Create a `.env` file in the root directory and add the following variables:
-    ```
-    PORT=3000
-    MONGODB_URI=<your_mongodb_connection_string>
-    SESSION_SECRET=<your_session_secret>
-    # Add any other necessary API keys or configurations
-    ```
+    Edit the .env.sample file to create a `.env` file
+    
 4.  **Run the application:**
     ```bash
     npm start
@@ -50,20 +50,11 @@ A web application to help users track their financial investments and portfolio 
 
 ## Usage
 
-1.  Navigate to the registration page to create a new account.
-2.  Log in with your credentials.
-3.  Start adding your financial assets to your portfolio.
-4.  View your portfolio dashboard to see current values and performance.
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1.  Fork the repository.
-2.  Create a new branch (`git checkout -b feature/your-feature-name`).
-3.  Make your changes.
-4.  Commit your changes (`git commit -m 'Add some feature'`).
-5.  Push to the branch (`git push origin feature/your-feature-name`).
-6.  Open a Pull Request.
-
-Please make sure to update tests as appropriate.
+1.  Navigate to the registration page to create a new account or log in if you already have one.
+2.  Explore the dashboard to get an overview of your net worth and asset allocations.
+3.  Navigate to the Crypto section to view market data and details for various cryptocurrencies.
+4.  Manage your portfolio by adding, viewing, or updating your financial assets.
+5.  Utilize the AI Chatbot (accessible via a chat button) to:
+    *   Ask questions about your portfolio.
+    *   Get insights into your investments.
+    *   Receive financial recommendations and market overviews.
