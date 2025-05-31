@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import api from '../../utils/api';
+import { getCryptoById } from '../../services/crypto';
+import { getAIMarketOverview } from '../../services/ai';
 import { DollarSign, BarChartHorizontalBig, Coins, Database, Box, Info, TrendingUp, TrendingDown } from 'lucide-react';
-
-const LoadingSpinner = () => (
-    <div className="flex justify-center items-center h-32">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-    </div>
-);
+import Loader from '../../components/common/Loader';
 
 const Section = ({ title, children, icon }) => (
     <section className="mb-8">
@@ -24,13 +20,14 @@ const CryptoDetails = () => {
     const [cryptoData, setCryptoData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    // const [aiOverview, setAIOverview] = useState(null);
+    const [aiOverview, setAIOverview] = useState(null);
+    const [aiLoading, setAILoading] = useState(false);
 
     const fetchCryptoData = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await api.get(`/api/crypto/get/${id}`);
-            setCryptoData(response.data.data);
+            const data = await getCryptoById(id);
+            setCryptoData(data);
         } catch (error) {
             console.error('Error fetching crypto data:', error);
             setError('Failed to fetch crypto data. Please try again later.');
@@ -38,28 +35,27 @@ const CryptoDetails = () => {
         setLoading(false);
     }, [id]);
 
-    /* const aiMarketOverview = useCallback(async () => {
-        setLoading(true);
+    const aiMarketOverview = useCallback(async () => {
+        setAILoading(true);
         try {
-            const response = await api.post(`/api/ai/market-overview`, cryptoData);
-            setAIOverview(response.data);
-            console.log('AI Market Overview:', response.data);
+            const overviewData = await getAIMarketOverview(cryptoData);
+            setAIOverview(overviewData);
+            console.log('AI Market Overview:', overviewData);
         } catch (error) {
             console.error('Error fetching AI market overview:', error);
             setError('Failed to fetch AI market overview. Please try again later.');
         }
-        setLoading(false);
-    }, [cryptoData]); */
+        setAILoading(false);
+    }, [cryptoData]);
 
     useEffect(() => {
         fetchCryptoData();
-        // aiMarketOverview();
     }, [fetchCryptoData]);
 
     if (loading) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-gray-300 p-4">
-                <LoadingSpinner />
+                <Loader />
                 <p className="mt-4 text-lg">Loading cryptocurrency details...</p>
             </div>
         );
@@ -92,9 +88,8 @@ const CryptoDetails = () => {
         circulating_supply,
         total_supply,
         max_supply,
-        description,
-        cmc_rank, // Assuming cmc_rank is available
-        id: coinMarketCapId // This is the ID like 1 for Bitcoin, 1027 for Ethereum for the image
+        cmc_rank,
+        id: coinMarketCapId
     } = coinDetails;
 
     if (!coinDetails.quote || !coinDetails.quote.USD) {
@@ -162,25 +157,23 @@ const CryptoDetails = () => {
                         </div>
                     </Section>
 
-                    {/* About Section */}
-                    {description && (
-                        <Section title={`About ${name}`} icon={<Info />}>
-                            <div className="p-4 bg-gray-700/60 rounded-lg shadow">
-                                <div
-                                    className="text-gray-300 prose prose-sm max-w-none prose-invert prose-p:my-2 prose-headings:my-3"
-                                    dangerouslySetInnerHTML={{ __html: description.replace(/\\r\\n|\\n|\\r/g, '<br />') }}
-                                ></div>
-                            </div>
-                        </Section>
-                    )}
                     {/* AI Market Overview Section */}
-                    {/* {aiOverview && (
-                        <Section title="AI Market Overview" icon={<Info />}>
+                    <Section title="AI Market Overview" icon={<Info />}>
+                        {!aiOverview && (
+                            <button
+                                onClick={aiMarketOverview}
+                                disabled={loading || !cryptoData} // Keep disabled logic for when button is shown
+                                className="mb-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:bg-gray-500"
+                            >
+                                {aiLoading ? 'Loading Overview...' : 'Get AI Market Overview'} {/* Simplified button text for loading state */}
+                            </button>
+                        )}
+                        {aiOverview && (
                             <div className="p-4 bg-gray-700/60 rounded-lg shadow">
                                 <p className="text-gray-300">{aiOverview.overview}</p>
                             </div>
-                        </Section>
-                    )} */}
+                        )}
+                    </Section>
 
                     {/* Last Updated Info */}
                     <div className="text-xs text-gray-500 mt-10 pt-4 border-t border-gray-700 text-right">

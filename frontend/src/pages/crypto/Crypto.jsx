@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../utils/api'; // Import the configured Axios instance
 import { useNavigate } from 'react-router-dom';
+import { getAllCrypto } from '../../services/crypto';
 
 const ArrowUpIcon = () => <span className="text-green-500">▲</span>;
 const ArrowDownIcon = () => <span className="text-red-500">▼</span>;
@@ -18,8 +18,8 @@ const Crypto = () => {
 
   const fetchPortfolioData = async () => {
     try {
-      const response = await api.get('/api/crypto/get-all'); // Use api instance
-      setPortfolioData(response.data);
+      const data = await getAllCrypto();
+      setPortfolioData(data);
     } catch (err) {
       console.error("Error fetching portfolio data:", err);
       setError(err.message || 'Failed to fetch data. Please try again later.');
